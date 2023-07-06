@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+if git diff HEAD~ HEAD --name-only | grep -E '^(package-lock\.json|yarn\.lock|pnpm-lock.yaml)$';
+then 
+    echo -e "Detected changes in dependencies, installing dependencies..." 
+    pnpm i
+fi
+
+exit 0
